@@ -7,12 +7,13 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 type ProjectProps = (typeof projectsData)[number];
 
 const Project = ({ title, description, tags, imageUrl }: ProjectProps) => {
-  
+
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["0 1", "1.33 1"],
   });
+  
   const scaleProgress = useTransform(scrollYProgress, [0, 1], [.8, 1]);
   const opacityProgress = useTransform(scrollYProgress, [0, 1], [.6, 1])
 
