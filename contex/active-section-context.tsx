@@ -1,28 +1,31 @@
 "use client"
-import { links } from '@/lib/data'
+import type { SectionName } from '@/lib/types';
 import React, { createContext, useContext, useState } from 'react'
-
-type SectionName = typeof links[number]['name'];
 
 type ActiceSectionContextProviderProps = {
   children: React.ReactNode
 };
 
 type ActiveSectionContextType = {
+  timeOfLastClick: number;
+  setTimeOfLastClick: React.Dispatch<React.SetStateAction<number>>;
   activeSection: SectionName;
-  setActiveSection: React.Dispatch<React.SetStateAction<"Home" | "About" | "Projects" | "Skills" | "Experience" | "Contact">>
+  setActiveSection: React.Dispatch<React.SetStateAction<"Home" | "About" | "Projects" | "Skills" | "Experience" | "Contact">>;
 }
 
 const ActiveSectionContext = createContext<ActiveSectionContextType | null>(null);
 
 export default function ActiveSectionContextProvider({ children }: ActiceSectionContextProviderProps) {
 
-  const [activeSection, setActiveSection] = useState<SectionName>("Home")
+  const [activeSection, setActiveSection] = useState<SectionName>("Home");
+  const [timeOfLastClick, setTimeOfLastClick] = useState(0); // we need to keep track of this to disable the observer temporarily when user clicks on a link
 
   return (
     <ActiveSectionContext.Provider value={{
       activeSection,
-      setActiveSection
+      setActiveSection,
+      timeOfLastClick,
+      setTimeOfLastClick,
     }}>
       { children }
     </ActiveSectionContext.Provider>
