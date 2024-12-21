@@ -1,6 +1,6 @@
 "use server"
 
-import { validateString } from "@/lib/utils";
+import { getErrorMessage, validateString } from "@/lib/utils";
 
 /*import { Resend } from "resend";
 
@@ -32,7 +32,7 @@ export const sendEmail = async (formData: FormData) => {
     }) */
   } catch (error) {
     return {
-      error: (error as Error).message
+      error: getErrorMessage(error)
     }
   } 
   
