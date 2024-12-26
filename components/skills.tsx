@@ -34,7 +34,7 @@ const Skills = () => {
             once: true
            }}
            custom={index}
-           className='bg-white border borderBlack rounded-xl px-5 py-3'
+           className='bg-white border borderBlack rounded-xl px-5 py-3 dark:text-white/80 dark:bg-white/10'
            key={index}
           >{skill}</motion.li>
         ))}
